@@ -5,7 +5,7 @@ export class AppRoutes {
       fullPath: '',
     },
     Movie: {
-      path: 'movie/:id',
+      path: 'movie',
       fullPath: '/movie'
     }
   }

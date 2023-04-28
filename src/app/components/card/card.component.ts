@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 export interface Movie {
+  id?: string;
   title?: string;
   original_title?: string;
   poster_path?: string;

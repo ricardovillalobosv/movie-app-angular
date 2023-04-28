@@ -10,23 +10,11 @@ export class AppComponent {
   title = 'movie-app-angular';
 
   constructor(private movieService: MovieService) {
-    this.getPopularMovies();
     this.getMovie();
     this.getImages();
   }
 
-  getPopularMovies() {
-    console.log('movies');
-    this.movieService.getPopularMovies().subscribe({
-      next: ({ results }) => {
-        console.log('app res', results);
-      },
-      error: () => {},
-      complete: () => {
-        console.log('loading false');
-      },
-    });
-  }
+  
 
   getMovie() {
     this.movieService.getMovie('640146').subscribe({

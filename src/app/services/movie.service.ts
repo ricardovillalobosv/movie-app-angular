@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-export interface resultHttp {
+export interface resultHttpList {
   results: [];
   page: number;
   total_pages: number;
@@ -18,12 +18,34 @@ export class MovieService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getPopularMovies(): Observable<resultHttp> {
-    const URL = `${this.BASE_URL}/popular?api_key=${this.API_KEY}&language=en-US&page=1`;
-    return this.httpClient.get<resultHttp>(URL).pipe(
+  getPopularMovies(): Observable<resultHttpList> {
+    const URL = `${this.BASE_URL}/popular?api_key=${this.API_KEY}&language=es-ES&page=1`;
+    return this.httpClient.get<resultHttpList>(URL).pipe(
       map((res) => {
         return res;
       })
     );
+  }
+
+  getMovie(movieId: string) {
+    // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+    const URL = `${this.BASE_URL}/${movieId}?api_key=${this.API_KEY}&language=es-ES`;
+    return this.httpClient.get(URL).pipe(
+      map((res) => {
+        console.log('res');
+        return res;
+      })
+    )
+  }
+
+  getMovieImage(movieId: string) {
+    // https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
+    const URL = `${this.BASE_URL}/${movieId}/images?api_key=${this.API_KEY}&language=es-ES`;
+    return this.httpClient.get(URL).pipe(
+      map((res) => {
+        console.log('res//', res);
+        return res;
+      })
+    )
   }
 }

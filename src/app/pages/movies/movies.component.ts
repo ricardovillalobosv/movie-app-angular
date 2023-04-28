@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AppRoutes } from 'src/app/app-routes.routes';
+import { AppState } from 'src/app/app.reducer';
 import { Movie } from 'src/app/components/card/card.component';
 import { MovieService } from 'src/app/services/movie.service';
+import { validCategories } from 'src/app/stores/category.actions';
 
 @Component({
   selector: 'app-movies',
@@ -10,22 +13,30 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent {
-  popularMovies: Movie[] = [];
+  category: validCategories = 'popular';
+  movies: Movie[] = [];
   routes = AppRoutes.ROUTES;
+  loading: boolean = false;
 
-  constructor(private movieService: MovieService, private router: Router) {
-    this.getPopularMovies();
+  constructor(
+    private movieService: MovieService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {
+    this.store.select('category').subscribe((category) => {
+      this.category = category;
+      this.getMovies();
+    });
   }
 
-  getPopularMovies() {
-    this.movieService.getPopularMovies().subscribe({
+  getMovies() {
+    this.loading = true;
+    this.movieService.getMovies(this.category).subscribe({
       next: ({ results }) => {
-        this.popularMovies = results;
+        this.movies = results;
       },
-      error: () => {},
-      complete: () => {
-        console.log('loading false');
-      },
+      error: (err) => console.log(err),
+      complete: () => (this.loading = false),
     });
   }
 

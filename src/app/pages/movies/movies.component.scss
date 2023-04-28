@@ -1,8 +1,10 @@
 .movies {
+  min-height: 100vh;
   padding: 50px 60px;
   background-color: #09090d;
 
   &__container {
+    width: 1065px;
     max-width: 1065px;
   }
 }

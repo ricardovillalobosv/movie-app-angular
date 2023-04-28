@@ -1,14 +1,18 @@
-<!-- <pre>{{ popularMovies | json }}</pre> -->
 <section class="movies flex justify-center">
   <div class="movies__container">
     <categories></categories>
-    <div class="flex flex-wrap gap-4">
-      <card
-        *ngFor="let movie of popularMovies"
-        [movie]="movie"
-        (click)="goToMovie(movie.id || '')"
-      >
-      </card>
+    <div class="flex flex-wrap gap-4" [class.justify-center]="loading">
+      <ng-template [ngIf]="loading">
+        <spinner></spinner>
+      </ng-template>
+      <ng-template [ngIf]="!loading">
+        <card
+          *ngFor="let movie of movies"
+          [movie]="movie"
+          (click)="goToMovie(movie.id || '')"
+        >
+        </card>
+      </ng-template>
     </div>
   </div>
 </section>

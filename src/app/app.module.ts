@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { CardModule } from './components/card/card.module';
+import { CategoriesModule } from './components/categories/categories.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CardModule } from './components/card/card.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CardModule
+    CardModule,
+    CategoriesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

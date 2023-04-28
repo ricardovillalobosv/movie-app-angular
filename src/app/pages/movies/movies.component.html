@@ -1,11 +1,14 @@
 <!-- <pre>{{ popularMovies | json }}</pre> -->
 <section class="movies flex justify-center">
-  <div class="movies__container flex flex-wrap gap-4">
-    <card
-      *ngFor="let movie of popularMovies"
-      [movie]="movie"
-      (click)="goToMovie(movie.id || '')"
-    >
-    </card>
+  <div class="movies__container">
+    <categories></categories>
+    <div class="flex flex-wrap gap-4">
+      <card
+        *ngFor="let movie of popularMovies"
+        [movie]="movie"
+        (click)="goToMovie(movie.id || '')"
+      >
+      </card>
+    </div>
   </div>
 </section>

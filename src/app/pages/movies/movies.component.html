@@ -1,4 +1,6 @@
 <!-- <pre>{{ popularMovies | json }}</pre> -->
-<card *ngFor="let movie of popularMovies">
-  
-</card>
+<section class="movies flex justify-center">
+  <div class="movies__container flex flex-wrap gap-4">
+    <card *ngFor="let movie of popularMovies" [movie]="movie"> </card>
+  </div>
+</section>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppRoutes } from 'src/app/app-routes.routes';
 import { AppState } from 'src/app/app.reducer';
-import { Movie } from 'src/app/components/card/card.component';
+import { Movie } from 'src/app/commons/movie';
 import { MovieService } from 'src/app/services/movie.service';
 import { validCategories } from 'src/app/stores/category.actions';
 
@@ -33,7 +33,11 @@ export class MoviesComponent {
     this.loading = true;
     this.movieService.getMovies(this.category).subscribe({
       next: ({ results }) => {
-        this.movies = results;
+        this.movies = results.sort((movie1: Movie, movie2: Movie) => {
+          const vote1 = movie1?.vote_average || '';
+          const vote2 = movie2?.vote_average || '';
+          return vote1 < vote2 ? 1 : vote1 > vote2 ? -1 : 0;
+        });
       },
       error: (err) => console.log(err),
       complete: () => (this.loading = false),

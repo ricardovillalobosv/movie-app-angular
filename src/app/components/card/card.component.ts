@@ -1,13 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-export interface Movie {
-  id?: string;
-  title?: string;
-  original_title?: string;
-  poster_path?: string;
-  release_date?: string;
-  vote_average?: string;
-}
+import { Movie } from 'src/app/commons/movie';
 
 @Component({
   selector: 'card',
@@ -19,5 +11,9 @@ export class CardComponent {
 
   get img() {
     return `https://image.tmdb.org/t/p/w200/${this.movie.poster_path}`;
+  }
+
+  get year() {
+    return (`${this.movie?.release_date}` || '').slice(0, 4);
   }
 }

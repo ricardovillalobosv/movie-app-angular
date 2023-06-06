@@ -1,0 +1,19 @@
+.movie__qualification {
+  display: flex;
+  align-items: center;
+  line-height: 1.25;
+  color: #f5c518;
+
+  &.color-black {
+    color: #000;
+  }
+
+  &__icon {
+    margin-right: 5px;
+  }
+
+  &__text {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}

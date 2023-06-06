@@ -26,20 +26,26 @@ export class MovieService {
     );
   }
 
-  getPopularMovies(): Observable<resultHttpList> {
-    const URL = `${this.BASE_URL}/popular?api_key=${this.API_KEY}&language=es-ES&page=1`;
-    return this.httpClient.get<resultHttpList>(URL).pipe(
+  getMovie(movieId: string) {
+    const URL = `${this.BASE_URL}/${movieId}?api_key=${this.API_KEY}&language=es-ES`;
+    return this.httpClient.get(URL).pipe(
       map((res) => {
         return res;
       })
     );
   }
 
-  getMovie(movieId: string) {
-    const URL = `${this.BASE_URL}/${movieId}?api_key=${this.API_KEY}&language=es-ES`;
+  getCredits(movieId: string) {
+    const URL = `${this.BASE_URL}/${movieId}/credits?api_key=${this.API_KEY}&language=es-ES`;
     return this.httpClient.get(URL).pipe(
-      map((res) => {
-        return res;
+      map((res: any) => {
+        const cast = res?.cast.filter(
+          (cast: any) => cast.known_for_department === 'Acting'
+        );
+        const directing = res?.cast.filter(
+          (cast: any) => cast.known_for_department === 'Directing'
+        );
+        return { cast, directing };
       })
     );
   }

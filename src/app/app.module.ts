@@ -12,9 +12,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './app.reducer';
 import { SpinnerModule } from './components/spinner/spinner.module';
+import { QualificationModule } from './components/qualification/qualification.module';
 
 @NgModule({
-  declarations: [AppComponent, MoviesComponent, MovieComponent],
+  declarations: [AppComponent, MoviesComponent, MovieComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,7 +28,8 @@ import { SpinnerModule } from './components/spinner/spinner.module';
     }),
     CardModule,
     CategoriesModule,
-    SpinnerModule
+    SpinnerModule,
+    QualificationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

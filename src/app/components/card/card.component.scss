@@ -9,12 +9,13 @@ $width-card: $width-img + 20px;
   background-color: #1d1d1f;
   cursor: pointer;
   transition: all 0.35s ease-in-out;
-  
+
   &:hover {
     background-color: #48494e;
   }
 
   &__img {
+    position: relative;
     width: $width-img;
     min-height: calc($width-img * 1.5);
     height: calc($width-img * 1.5);
@@ -37,25 +38,24 @@ $width-card: $width-img + 20px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   &__text {
-    color: #efefef;
+    color: #ffffff;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.25;
   }
 
   &__qualification {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 1.25;
-    color: #f5c518;
-
-    &__icon {
-      margin-right: 5px;
+    &__container {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 8px;
+      border-radius: 10px;
+      background-color: #f5c518;
+      z-index: 50;
     }
   }
 

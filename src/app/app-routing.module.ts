@@ -15,6 +15,10 @@ const routes: Routes = [
     path: appRoutes.Movie.path,
     component: MovieComponent,
   },
+  {
+    path: '**',
+    redirectTo: appRoutes.Movies.path,
+  },
 ];
 
 @NgModule({

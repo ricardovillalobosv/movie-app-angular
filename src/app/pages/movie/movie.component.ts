@@ -34,7 +34,6 @@ export class MovieComponent implements OnInit {
   getMovie() {
     this.movieService.getMovie(this.id).subscribe({
       next: (movie: Movie) => {
-        console.log('movie__', movie);
         this.movie = movie;
         this.genders = movie?.genres || [];
         this.releaseCountry =

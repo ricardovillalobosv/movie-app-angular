@@ -1,0 +1,22 @@
+.avatar__card {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 16px;
+  background-color: #1d1d1f;
+
+  &__img {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    margin-right: 8px;
+    border-radius: 16px;
+    transform: scale(0.95);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

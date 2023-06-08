@@ -49,4 +49,13 @@ export class MovieService {
       })
     );
   }
+
+  getRecommendations(movieId: string) {
+    const URL = `${this.BASE_URL}/${movieId}/recommendations?api_key=${this.API_KEY}&language=es-ES`;
+    return this.httpClient.get<resultHttpList>(URL).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }

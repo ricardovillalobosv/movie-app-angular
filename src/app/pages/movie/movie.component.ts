@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routes.routes';
 import { Cast } from 'src/app/commons/cats';
 import { Genre } from 'src/app/commons/genre';
 import { Movie } from 'src/app/commons/movie';
+import { Recommendations } from 'src/app/commons/recommendations';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -12,23 +14,38 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieComponent implements OnInit {
   id: string = '';
+  routes = AppRoutes.ROUTES;
 
   movie: Movie = {};
   genders: Genre[] = [];
   mainCast: Cast[] = [];
+  recommendations: Movie[] = [];
   releaseCountry: string = '';
   backgroundImg: string = '';
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private movieService: MovieService
   ) {
-    this.route.queryParams.subscribe(({ id }) => (this.id = id));
+    this.route.queryParams.subscribe(({ id }) => {
+      this.id = id;
+      this.getInformation();
+    });
   }
 
   ngOnInit(): void {
-    this.getMovie();
-    this.getCredits();
+    this.getInformation();
+  }
+
+  getRecommendations() {
+    this.movieService.getRecommendations(this.id).subscribe({
+      next: ({ results }) => {
+        this.recommendations = results;
+      },
+      error: () => {},
+      complete: () => {},
+    });
   }
 
   getMovie() {
@@ -59,6 +76,12 @@ export class MovieComponent implements OnInit {
     });
   }
 
+  getInformation() {
+    this.getMovie();
+    this.getCredits();
+    this.getRecommendations();
+  }
+
   get poster(): string {
     return `https://image.tmdb.org/t/p/w300/${this.movie.poster_path}`;
   }
@@ -73,5 +96,9 @@ export class MovieComponent implements OnInit {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
     return `${hours}h ${minutes}m`;
+  }
+
+  goToMovie(id: string) {
+    this.router.navigate([this.routes.Movie.path], { queryParams: { id } });
   }
 }

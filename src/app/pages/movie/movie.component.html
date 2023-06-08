@@ -1,4 +1,4 @@
-<section class="movie flex justify-center">
+<section class="movie flex flex-wrap justify-center">
   <div class="movie__background">
     <img
       class="movie__background__img"
@@ -6,7 +6,7 @@
       alt="backgroundImg"
     />
   </div>
-  <div class="movie__container">
+  <div class="movie__container mb-4">
     <article class="movie__poster p-5">
       <div class="movie__poster__img">
         <img [src]="poster" [alt]="movie.title" />
@@ -45,6 +45,19 @@
             class="col-span-2"
           ></app-avatar-card>
         </article>
+      </div>
+    </article>
+  </div>
+  <div class="movie__container">
+    <article class="movie__recommendations p-5">
+      <h1 class="text-xl text-white mb-4">Recomendaciones</h1>
+      <div class="flex gap-4">
+        <card
+          *ngFor="let movie of recommendations"
+          [movie]="movie"
+          (click)="goToMovie(movie.id || '')"
+        >
+        </card>
       </div>
     </article>
   </div>

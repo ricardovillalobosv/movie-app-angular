@@ -1,11 +1,13 @@
-<section class="categories flex items-center gap-4">
+<section class="categories flex flex-col md:flex-row md:items-center gap-4">
   <h1 class="title"><span class="text-[#fbbf24]">Movie</span>App</h1>
-  <button
-    *ngFor="let category of categories"
-    (click)="selectCategory(category.key)"
-    class="category"
-    [class.selected]="currentCategory === category.key"
-  >
-    <p class="category__text">{{ category.title }}</p>
-  </button>
+  <div class="flex justify-start items-center gap-x-2 md:gap-x-4">
+    <button
+      *ngFor="let category of categories"
+      (click)="selectCategory(category.key)"
+      class="category"
+      [class.selected]="currentCategory === category.key"
+    >
+      <p class="category__text">{{ category.title }}</p>
+    </button>
+  </div>
 </section>

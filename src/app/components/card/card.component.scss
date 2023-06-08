@@ -1,14 +1,26 @@
 $border: 25px;
+
+$mobile-width-img: 130px;
+$mobile-width-card: $mobile-width-img + 20px;
+
 $width-img: 180px;
 $width-card: $width-img + 20px;
 
 .card {
-  width: $width-card;
+  width: $mobile-width-card;
   padding: 10px;
   border-radius: $border;
   background-color: #1d1d1f;
   cursor: pointer;
   transition: all 0.35s ease-in-out;
+
+  @media (min-width: 768px) {
+    width: $width-card;
+  }
+
+  @media (min-width: 1280px) {
+    width: $width-card - 30px;
+  }
 
   &:hover {
     background-color: #48494e;
@@ -16,9 +28,7 @@ $width-card: $width-img + 20px;
 
   &__img {
     position: relative;
-    width: $width-img;
-    min-height: calc($width-img * 1.5);
-    height: calc($width-img * 1.5);
+    width: $mobile-width-img;
     overflow: hidden;
     border-radius: $border;
     margin-bottom: 10px;
@@ -27,23 +37,39 @@ $width-card: $width-img + 20px;
       width: 100%;
       height: 100%;
     }
+
+    @media (min-width: 768px) {
+      width: $width-img;
+    }
+
+    @media (min-width: 1280px) {
+      width: $width-img - 30px;
+    }
   }
 
   &__title {
     color: white;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 14px;
     line-height: 1.25;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @media (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   &__text {
     color: #ffffff;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.25;
+    
+    @media (min-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   &__qualification {

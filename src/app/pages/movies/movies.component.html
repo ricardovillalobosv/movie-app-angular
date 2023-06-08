@@ -1,17 +1,19 @@
 <section class="movies flex justify-center">
   <div class="movies__container">
     <categories></categories>
-    <div class="flex flex-wrap gap-4" [class.justify-center]="loading">
+    <div class="grid grid-cols-12 gap-4" [class.justify-center]="loading">
       <ng-template [ngIf]="loading">
-        <spinner></spinner>
+        <div class="col-span-12 flex justify-center">
+          <spinner></spinner>
+        </div>
       </ng-template>
       <ng-template [ngIf]="!loading">
-        <card
+        <div
+          class="col-span-6 md:col-span-4 l:col-span-3 xl:col-span-2 flex justify-center"
           *ngFor="let movie of movies"
-          [movie]="movie"
-          (click)="goToMovie(movie.id || '')"
         >
-        </card>
+          <card [movie]="movie" (click)="goToMovie(movie.id || '')"> </card>
+        </div>
       </ng-template>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment as env } from 'src/environments/environment';
 
 export interface resultHttpList {
   results: [];
@@ -12,7 +13,7 @@ export interface resultHttpList {
   providedIn: 'root',
 })
 export class MovieService {
-  private API_KEY = '2cedd88de8d72081c5c3ed2cd1088391';
+  private API_KEY = env.API_KEY;
   private BASE_URL = 'https://api.themoviedb.org/3/movie';
 
   constructor(private httpClient: HttpClient) {}

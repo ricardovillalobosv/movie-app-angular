@@ -8,46 +8,57 @@
   </div>
   <div class="movie__container mb-4">
     <article class="movie__poster p-2 md:p-5">
-      <div class="movie__poster__img">
-        <img [src]="poster" [alt]="movie.title" />
-      </div>
-      <div class="flex flex-wrap gap-2 mt-5">
-        <p *ngFor="let gender of genders" class="movie__gender">
-          {{ gender.name }}
-        </p>
-      </div>
+      <ng-template [ngIf]="loading">
+        <app-skeleton-movie-poster></app-skeleton-movie-poster>
+      </ng-template>
+
+      <ng-template [ngIf]="!loading">
+        <div class="movie__poster__img">
+          <img [src]="poster" [alt]="movie.title" />
+        </div>
+        <div class="flex flex-wrap gap-2 mt-5">
+          <p *ngFor="let gender of genders" class="movie__gender">
+            {{ gender.name }}
+          </p>
+        </div>
+      </ng-template>
     </article>
     <article class="movie__detail p-2 md:p-5">
-      <h1 class="movie__title">{{ movie.title }}</h1>
-      <h2 class="movie__subtitle">{{ movie.tagline }}</h2>
-      <div class="movie__container__qualification">
-        <app-qualification
-          [qualification]="movie.vote_average || 0"
-          size="20px"
-        ></app-qualification>
-      </div>
-      <div class="flex items-center gap-3 mt-2">
-        <span class="dot"></span>
-        <span class="text-xs md:text-sm text-white">{{ release }}</span>
-        <span class="dot"></span>
-        <span class="text-xs md:text-sm text-white">{{ duration }}</span>
-      </div>
-      <div class="mt-4">
-        <p class="text-xl font-semibold text-white mb-1">Sinopsis</p>
-        <p class="text-white font-light text-sm md:text-md">
-          {{ movie.overview }}
-        </p>
-      </div>
-      <div class="mt-4">
-        <p class="text-xl font-semibold text-white mb-4">Reparto Principal</p>
-        <article class="grid grid-cols-6 gap-2 md:gap-4">
-          <app-avatar-card
-            *ngFor="let cast of mainCast"
-            [cast]="cast"
-            class="col-span-6 md:col-span-3 l:col-span-2"
-          ></app-avatar-card>
-        </article>
-      </div>
+      <ng-template [ngIf]="loading">
+        <app-skeleton-movie-detail></app-skeleton-movie-detail>
+      </ng-template>
+      <ng-template [ngIf]="!loading">
+        <h1 class="movie__title">{{ movie.title }}</h1>
+        <h2 class="movie__subtitle">{{ movie.tagline }}</h2>
+        <div class="movie__container__qualification">
+          <app-qualification
+            [qualification]="movie.vote_average || 0"
+            size="20px"
+          ></app-qualification>
+        </div>
+        <div class="flex items-center gap-3 mt-2">
+          <span class="dot"></span>
+          <span class="text-xs md:text-sm text-white">{{ release }}</span>
+          <span class="dot"></span>
+          <span class="text-xs md:text-sm text-white">{{ duration }}</span>
+        </div>
+        <div class="mt-4">
+          <p class="text-xl font-semibold text-white mb-1">Sinopsis</p>
+          <p class="text-white font-light text-sm md:text-md">
+            {{ movie.overview }}
+          </p>
+        </div>
+        <div class="mt-4">
+          <p class="text-xl font-semibold text-white mb-4">Reparto Principal</p>
+          <article class="grid grid-cols-6 gap-2 md:gap-4">
+            <app-avatar-card
+              *ngFor="let cast of mainCast"
+              [cast]="cast"
+              class="col-span-6 md:col-span-3 l:col-span-2"
+            ></app-avatar-card>
+          </article>
+        </div>
+      </ng-template>
     </article>
   </div>
   <div *ngIf="recommendations.length" class="movie__container">

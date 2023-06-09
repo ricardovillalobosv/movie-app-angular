@@ -14,9 +14,12 @@ import { appReducers } from './app.reducer';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { QualificationModule } from './components/qualification/qualification.module';
 import { AvatarCardComponent } from './components/avatar-card/avatar-card.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { SkeletonMoviePosterComponent } from './components/skeleton-movie-poster/skeleton-movie-poster.component';
+import { SkeletonMovieDetailComponent } from './components/skeleton-movie-detail/skeleton-movie-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, MoviesComponent, MovieComponent, AvatarCardComponent,],
+  declarations: [AppComponent, MoviesComponent, MovieComponent, AvatarCardComponent, SkeletonMoviePosterComponent, SkeletonMovieDetailComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +33,8 @@ import { AvatarCardComponent } from './components/avatar-card/avatar-card.compon
     CardModule,
     CategoriesModule,
     SpinnerModule,
-    QualificationModule
+    QualificationModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -16,6 +16,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieComponent implements OnInit {
   id: string = '';
   routes = AppRoutes.ROUTES;
+  loading: boolean = false;
 
   movie: Movie = {};
   genders: Genre[] = [];
@@ -28,7 +29,7 @@ export class MovieComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private viewportScroller: ViewportScroller,
+    private viewportScroller: ViewportScroller
   ) {
     this.route.queryParams.subscribe(({ id }) => {
       this.id = id;
@@ -42,16 +43,18 @@ export class MovieComponent implements OnInit {
   }
 
   getRecommendations() {
+    this.loading = true;
     this.movieService.getRecommendations(this.id).subscribe({
       next: ({ results }) => {
         this.recommendations = results;
       },
       error: () => {},
-      complete: () => {},
+      complete: () => (this.loading = false),
     });
   }
 
   getMovie() {
+    this.loading = true;
     this.movieService.getMovie(this.id).subscribe({
       next: (movie: Movie) => {
         this.movie = movie;
@@ -61,11 +64,12 @@ export class MovieComponent implements OnInit {
         this.backgroundImg = `https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`;
       },
       error: () => {},
-      complete: () => {},
+      complete: () => (this.loading = false),
     });
   }
 
   getCredits() {
+    this.loading = true;
     this.movieService.getCredits(this.id).subscribe({
       next: ({ cast, directing }) => {
         const mainCast: Cast[] = cast.slice(0, 9);
@@ -75,7 +79,7 @@ export class MovieComponent implements OnInit {
         }));
       },
       error: () => {},
-      complete: () => {},
+      complete: () => (this.loading = false),
     });
   }
 

@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routes.routes';
@@ -26,7 +27,8 @@ export class MovieComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private viewportScroller: ViewportScroller,
   ) {
     this.route.queryParams.subscribe(({ id }) => {
       this.id = id;
@@ -35,6 +37,7 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
     this.getInformation();
   }
 
@@ -100,5 +103,6 @@ export class MovieComponent implements OnInit {
 
   goToMovie(id: string) {
     this.router.navigate([this.routes.Movie.path], { queryParams: { id } });
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 }
